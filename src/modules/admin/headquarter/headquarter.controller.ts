@@ -8,8 +8,11 @@ import {
 } from '../../../common/dtos/query-param.dto';
 import { buildOrder } from '../../../common/utils/query-helpers';
 import { CreateHeadquarterDto } from './dtos/create.dto';
+import { Roles } from '../../../common/decorators/role.decorator';
+import { ERoles } from 'src/common/enums/role.enum';
 
 @Controller('admin/headquarter')
+@Roles(ERoles.ADMIN)
 export class HeadquarterController {
   constructor(private readonly headquarterService: HeadquarterService) {}
 

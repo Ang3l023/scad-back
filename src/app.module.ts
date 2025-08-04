@@ -4,9 +4,15 @@ import { DatabaseModule } from './database/database.module';
 import { AdminModule } from './modules/admin/admin.module';
 import * as Joi from 'joi';
 import configuration from './config/enviroment';
+import { APP_GUARD } from '@nestjs/core';
+import { AuthGuard } from './common/guards/auth.guard';
+import { JwtModule } from '@nestjs/jwt';
+import { RolesGuard } from './common/guards/role.guard';
 
 @Module({
   imports: [
+    ConfigModule,
+    JwtModule,
     ConfigModule.forRoot({
       load: [configuration],
       validationSchema: Joi.object({
@@ -16,6 +22,8 @@ import configuration from './config/enviroment';
         DATABASE_USERNAME: Joi.string().required(),
         DATABASE_PASSWORD: Joi.string().required(),
         DATABASE_NAME: Joi.string().required(),
+        JWT_SECRET: Joi.string().required(),
+        JWT_EXPIRES_IN: Joi.string().required(),
       }),
       validationOptions: {
         allowUnknow: false,
@@ -26,6 +34,9 @@ import configuration from './config/enviroment';
     AdminModule,
   ],
   controllers: [],
-  providers: [],
+  providers: [
+    { provide: APP_GUARD, useClass: AuthGuard },
+    { provide: APP_GUARD, useClass: RolesGuard },
+  ],
 })
 export class AppModule {}

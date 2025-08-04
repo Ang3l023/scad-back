@@ -8,6 +8,10 @@ export default () =>
       password: process.env.DATABASE_PASSWORD,
       name: process.env.DATABASE_NAME,
     },
+    jwt: {
+      secret: process.env.JWT_SECRET,
+      expiresIn: process.env.JWT_EXPIRES_IN,
+    },
   }) as IEnviroment;
 
 export interface IEnviroment {
@@ -18,5 +22,9 @@ export interface IEnviroment {
     username: string;
     password: string;
     name: string;
+  };
+  jwt: {
+    secret: string;
+    expiresIn: string;
   };
 }

@@ -1,4 +1,5 @@
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+import * as bcrypt from 'bcrypt';
 import { ERoles } from '../../common/enums/role.enum';
 import { TimeStamp } from './timestamp.schema';
 import { Assistance } from './assistance.schema';
@@ -44,4 +45,8 @@ export class User extends TimeStamp {
 
   @OneToMany(() => Permission, (permission) => permission.approvedBy)
   approved: Permission[];
+
+  isPassword(password: string): boolean {
+    return bcrypt.compareSync(password, this.password);
+  }
 }
