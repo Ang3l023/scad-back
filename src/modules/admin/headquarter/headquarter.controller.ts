@@ -1,4 +1,13 @@
-import { Body, Controller, Get, Post, Query } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Patch,
+  Post,
+  Query,
+} from '@nestjs/common';
 import { HeadquarterService } from './headquarter.service';
 import { HeadquarterFilterDto } from './dtos/headquarter-filter.dto';
 import {
@@ -10,6 +19,7 @@ import { buildOrder } from '../../../common/utils/query-helpers';
 import { CreateHeadquarterDto } from './dtos/create.dto';
 import { Roles } from '../../../common/decorators/role.decorator';
 import { ERoles } from 'src/common/enums/role.enum';
+import { UpdateHeadquarterDto } from './dtos/update.dto';
 
 @Controller('admin/headquarter')
 @Roles(ERoles.ADMIN)
@@ -31,8 +41,23 @@ export class HeadquarterController {
     });
   }
 
+  @Get(':cid')
+  findOne(@Param('cid') cid: string) {
+    return this.headquarterService.findOne(cid);
+  }
+
   @Post()
   async create(@Body() createDto: CreateHeadquarterDto) {
     return this.headquarterService.create(createDto);
+  }
+
+  @Patch(':cid')
+  update(@Param('cid') cid: string, @Body() updateDto: UpdateHeadquarterDto) {
+    return this.headquarterService.update(cid, updateDto);
+  }
+
+  @Delete(':cid')
+  delete(@Param('cid') cid: string) {
+    return this.headquarterService.delete(cid);
   }
 }
