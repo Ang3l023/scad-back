@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import * as bcrypt from 'bcrypt';
 import { v4 as uuidV4 } from 'uuid';
 import { CreateUserDto } from './dto/create-user.dto';
@@ -23,8 +23,14 @@ export class UserService {
     return await this.userRepository.findAll(options);
   }
 
-  async findOne(cid: string): Promise<User> {
-    return await this.userRepository.findByCid(cid);
+  async findOne(cid: string): Promise<User | null> {
+    const user = await this.userRepository.findByCid(cid);
+
+    if (!user) {
+      throw new NotFoundException();
+    }
+
+    return user;
   }
 
   async updateOne(
@@ -34,7 +40,7 @@ export class UserService {
     const user = await this.findOne(cid);
 
     const updatedUser = await this.userRepository.updateOneById(
-      user.id,
+      user!.id,
       updateUserDto,
     );
 
@@ -44,6 +50,6 @@ export class UserService {
   async delete(cid: string): Promise<void> {
     const user = await this.findOne(cid);
 
-    await this.userRepository.softDelete(user.id);
+    await this.userRepository.softDelete(user!.id);
   }
 }

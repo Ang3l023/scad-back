@@ -42,6 +42,13 @@ export abstract class BaseRepository<T extends ObjectLiteral> {
     });
   }
 
+  async findByCid(cid: string, relations: string[] = []): Promise<T | null> {
+    return await this.repository.findOne({
+      where: { cid } as unknown as FindOptionsWhere<T>,
+      relations,
+    });
+  }
+
   create(data: DeepPartial<T>): Promise<T> {
     const entity = this.repository.create(data);
 
