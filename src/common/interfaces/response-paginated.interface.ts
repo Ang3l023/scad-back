@@ -1,5 +1,5 @@
 export interface IReponsePaginated<T> {
-  data: T[];
+  results: T[];
   total: number;
   page: number;
   limit: number;

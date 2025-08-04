@@ -5,11 +5,13 @@ import { TimeStamp } from './timestamp.schema';
 import { Assistance } from './assistance.schema';
 import { Permission } from './permission.schema';
 import { Schedule } from './schedule.schema';
+import { Exclude } from 'class-transformer';
 
 @Entity({
   name: 'users',
 })
 export class User extends TimeStamp {
+  @Exclude()
   @PrimaryGeneratedColumn()
   id: number;
 
@@ -25,6 +27,7 @@ export class User extends TimeStamp {
   @Column({ nullable: false })
   email: string;
 
+  @Exclude()
   @Column({ nullable: false })
   password: string;
 

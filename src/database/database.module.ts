@@ -30,6 +30,7 @@ import { RepositoriesModule } from './repositories/repositories.module';
           Assistance,
         ],
         synchronize: true,
+        timezone: '-05:00',
       }),
       inject: [ConfigService],
     }),

@@ -1,4 +1,5 @@
 import {
+  IsBoolean,
   IsEmail,
   IsEnum,
   IsNotEmpty,
@@ -35,4 +36,9 @@ export class CreateUserDto {
   @IsOptional()
   @IsEnum(ERoles)
   role: ERoles = ERoles.EMPLOYEE;
+
+  @ApiPropertyOptional()
+  @IsOptional()
+  @IsBoolean()
+  active: boolean;
 }

@@ -32,7 +32,7 @@ export abstract class BaseRepository<T extends ObjectLiteral> {
       order,
     });
 
-    return { data, total, page, limit };
+    return { results: data, total, page, limit };
   }
 
   async findById(id: number, relations: string[] = []): Promise<T | null> {

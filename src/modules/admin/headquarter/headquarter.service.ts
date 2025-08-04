@@ -2,7 +2,6 @@ import { Injectable } from '@nestjs/common';
 import { v4 as uuidV4 } from 'uuid';
 import { HeadquarterRepository } from '../../../database/repositories/headquarter.repository';
 import { FindAllOptions } from '../../../database/repositories/base.repository';
-import { User } from '../../../database/schemas/user.schema';
 import { CreateHeadquarterDto } from './dtos/create.dto';
 import { Headquarter } from '../../../database/schemas/headquarter.schema';
 
@@ -10,7 +9,7 @@ import { Headquarter } from '../../../database/schemas/headquarter.schema';
 export class HeadquarterService {
   constructor(private readonly headquarterRepository: HeadquarterRepository) {}
 
-  async findAll(options: FindAllOptions<User>) {
+  async findAll(options: FindAllOptions<Headquarter>) {
     return await this.headquarterRepository.findAll(options);
   }
 
