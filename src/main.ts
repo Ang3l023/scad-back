@@ -1,4 +1,5 @@
 import { NestFactory, Reflector } from '@nestjs/core';
+import helmet from 'helmet';
 import { AppModule } from './app.module';
 import { ConfigService } from '@nestjs/config';
 import {
@@ -22,6 +23,10 @@ async function bootstrap() {
   const reflector = app.get(Reflector);
 
   app.useGlobalInterceptors(new ClassSerializerInterceptor(reflector));
+
+  app.use(helmet());
+
+  app.enableCors();
 
   const logger = new Logger();
 
