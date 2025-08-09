@@ -1,4 +1,10 @@
-import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Column,
+  Entity,
+  Generated,
+  OneToMany,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
 import * as bcrypt from 'bcrypt';
 import { ERoles } from '../../common/enums/role.enum';
 import { TimeStamp } from './timestamp.schema';
@@ -15,7 +21,8 @@ export class User extends TimeStamp {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column({ nullable: false })
+  @Column()
+  @Generated('uuid')
   cid: string;
 
   @Column({ nullable: false })

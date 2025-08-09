@@ -1,6 +1,7 @@
 import {
   Column,
   Entity,
+  Generated,
   ManyToOne,
   OneToMany,
   PrimaryGeneratedColumn,
@@ -16,6 +17,10 @@ import { TimeStamp } from './timestamp.schema';
 export class Assistance extends TimeStamp {
   @PrimaryGeneratedColumn()
   id: number;
+
+  @Column()
+  @Generated('uuid')
+  cid: string;
 
   @Column({ nullable: false })
   date: Date;

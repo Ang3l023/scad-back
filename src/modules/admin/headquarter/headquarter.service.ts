@@ -1,5 +1,4 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
-import { v4 as uuidV4 } from 'uuid';
 import { HeadquarterRepository } from '../../../database/repositories/headquarter.repository';
 import { FindAllOptions } from '../../../database/repositories/base.repository';
 import { CreateHeadquarterDto } from './dtos/create.dto';
@@ -15,10 +14,7 @@ export class HeadquarterService {
   }
 
   async create(createDto: CreateHeadquarterDto): Promise<Headquarter> {
-    return await this.headquarterRepository.create({
-      ...createDto,
-      cid: uuidV4(),
-    });
+    return await this.headquarterRepository.create(createDto);
   }
 
   async findOne(cid: string): Promise<Headquarter | null> {

@@ -1,4 +1,10 @@
-import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Column,
+  Entity,
+  Generated,
+  ManyToOne,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
 import { User } from './user.schema';
 import { TimeStamp } from './timestamp.schema';
 import { Assistance } from './assistance.schema';
@@ -7,6 +13,10 @@ import { Assistance } from './assistance.schema';
 export class Permission extends TimeStamp {
   @PrimaryGeneratedColumn()
   id: number;
+
+  @Column()
+  @Generated('uuid')
+  cid: string;
 
   @Column()
   startDate: Date;

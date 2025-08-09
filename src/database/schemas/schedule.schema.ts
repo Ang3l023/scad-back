@@ -1,4 +1,10 @@
-import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Column,
+  Entity,
+  Generated,
+  ManyToOne,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
 import { Weekday } from './weekday.schema';
 import { User } from './user.schema';
 import { Headquarter } from './headquarter.schema';
@@ -8,6 +14,10 @@ import { TimeStamp } from './timestamp.schema';
 export class Schedule extends TimeStamp {
   @PrimaryGeneratedColumn()
   id: number;
+
+  @Column()
+  @Generated('uuid')
+  cid: string;
 
   @ManyToOne(() => Weekday, (weekday) => weekday.schedules)
   weekday: Weekday;

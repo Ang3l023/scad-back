@@ -1,4 +1,10 @@
-import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Column,
+  Entity,
+  Generated,
+  OneToMany,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
 import { Schedule } from './schedule.schema';
 import { TimeStamp } from './timestamp.schema';
 import { Exclude } from 'class-transformer';
@@ -10,6 +16,7 @@ export class Headquarter extends TimeStamp {
   id: number;
 
   @Column()
+  @Generated('uuid')
   cid: string;
 
   @Column()

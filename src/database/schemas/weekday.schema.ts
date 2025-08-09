@@ -1,4 +1,10 @@
-import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Column,
+  Entity,
+  Generated,
+  OneToMany,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
 import { TimeStamp } from './timestamp.schema';
 import { Schedule } from './schedule.schema';
 
@@ -8,6 +14,7 @@ export class Weekday extends TimeStamp {
   id: number;
 
   @Column()
+  @Generated('uuid')
   cid: string;
 
   @Column()
